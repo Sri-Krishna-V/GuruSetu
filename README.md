@@ -1,14 +1,35 @@
+<div align="center">
+
 # GuruSetu
 
-**An AI-driven academic research collaboration platform that connects students and faculty through graph-based knowledge representation and semantic similarity matching.**
+**Bridge to the Teacher — AI-powered research collaboration between students and faculty.**
 
-Live: [https://gurusetu.netlify.app](https://gurusetu.netlify.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-gurusetu.netlify.app-4a9eff?style=for-the-badge&logo=netlify&logoColor=white)](https://gurusetu.netlify.app)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Next.js](https://img.shields.io/badge/Next.js-14.1.0-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![Neo4j](https://img.shields.io/badge/Neo4j-5.16.0-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+
+
+</div>
+
+---
+
+<div align="center">
+
+An AI-driven academic research collaboration platform that connects students and faculty through **graph-based knowledge representation** and **semantic similarity matching** — built for Amrita University.
+
+[View Live Demo](https://gurusetu.netlify.app) 
+
+</div>
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Key Features](#key-features)
 - [User Journey](#user-journey)
 - [System Architecture](#system-architecture)
 - [Repository Structure](#repository-structure)
@@ -32,9 +53,34 @@ Live: [https://gurusetu.netlify.app](https://gurusetu.netlify.app)
 
 ## Overview
 
-GuruSetu (Sanskrit: "bridge to the teacher") is a research collaboration platform scoped to Amrita University. It enables students to discover faculty research openings, submit applications, and receive AI-ranked mentor recommendations — while faculty can post openings, define skill requirements, and identify best-fit candidates from the student body.
+GuruSetu (Sanskrit: *"bridge to the teacher"*) is a research collaboration platform scoped to Amrita University. It enables students to discover faculty research openings, submit applications, and receive AI-ranked mentor recommendations — while faculty can post openings, define skill requirements, and identify best-fit candidates from the student body.
 
 The platform models users, skills, interests, and research topics as a **property graph** in Neo4j. Recommendations are generated via Cypher-traversal-based graph scoring combined with vector cosine similarity computed from sentence-level embeddings.
+
+The core problem it solves: research mentor-matching in academia is manual, opaque, and inefficient. GuruSetu automates this by representing the entire academic knowledge domain as a graph, where a student's skills and a faculty's research interests converge at shared `Concept` nodes — making compatibility quantifiable and discoverable.
+
+---
+
+## Key Features
+
+**For Students**
+- Personalized research opening recommendations ranked by skill-match percentage
+- AI-powered faculty mentor discovery based on shared research interests
+- Full application tracking pipeline with real-time status notifications
+- Portfolio builder for projects, publications, and research interests
+
+**For Faculty**
+- Post research openings with fine-grained constraints (CGPA threshold, target batch, deadline, collaboration type)
+- Graph-scored student candidate recommendations per opening
+- Semantic search across the entire student body using natural language queries
+- Cross-faculty collaboration discovery feed
+
+**Platform**
+- Dual-role authentication with institutional email enforcement (`@cb.amrita.edu` / `@cb.students.amrita.edu`)
+- Knowledge graph with 6 node types and 9 typed relationship classes
+- Hybrid recommendation engine: Cypher graph traversal for dashboards, vector cosine similarity for search
+- Lightweight sentence-transformer inference (`paraphrase-albert-small-v2`, ~45MB) running on CPU
+- Cloudinary-backed profile image storage with automatic face-crop
 
 ---
 
@@ -550,8 +596,38 @@ docker run -p 3000:3000 -e NEXT_PUBLIC_API_URL=http://localhost:8000 gurusetu-fr
 
 ## Contributing
 
+Contributions are welcome. To maintain consistency across the codebase, please follow these guidelines:
+
 1. Fork the repository and create a feature branch from `main`.
 2. Backend changes: ensure all new endpoints have role guards via `get_current_user` and validate inputs with Pydantic models.
 3. Frontend changes: add new API calls to the appropriate service module rather than directly in components.
-4. Graph schema changes: update the `scripts/create_constraints.py` for any new node labels or uniqueness constraints.
-5. Open a pull request with a clear description of the change and its motivation.
+4. Graph schema changes: update `scripts/create_constraints.py` for any new node labels or uniqueness constraints.
+5. Keep commits atomic and write descriptive commit messages.
+6. Open a pull request against `main` with a clear description of the change and its motivation.
+
+For significant changes, open an issue first to discuss the approach before investing in implementation.
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for details.
+
+---
+
+## Acknowledgements
+
+- [FastAPI](https://fastapi.tiangolo.com) — for the high-performance Python web framework
+- [Neo4j AuraDB](https://neo4j.com/cloud/platform/aura-graph-database/) — for managed graph database hosting
+- [Sentence Transformers](https://www.sbert.net) — for the open-source semantic embedding library
+- [Cloudinary](https://cloudinary.com) — for media storage and transformation APIs
+- [Netlify](https://netlify.com) — for frontend deployment and CDN
+- [Amrita Vishwa Vidyapeetham](https://amrita.edu) — institutional context and domain inspiration
+
+---
+
+<div align="center">
+
+Built with purpose at Amrita University · [https://gurusetu.netlify.app](https://gurusetu.netlify.app)
+
+</div>
